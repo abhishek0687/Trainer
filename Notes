@@ -1,0 +1,50 @@
+db.courses.update({category:"Fitness"},{$pushAll:{subCategory:["Jogging"]}})
+
+https://docs.mongodb.com/v3.0/tutorial/store-javascript-function-on-server/ --stored javascript
+
+Updating trainer details
+Deleting detais
+
+
+db.counter.insertMany([{_id:"Chinese",sequence_value:0},
+{_id:"Classical",sequence_value:0},
+{_id:"Cycling",sequence_value:0},
+{_id:"French",sequence_value:0},
+{_id:"Gym",sequence_value:0},
+{_id:"Italian",sequence_value:0},
+{_id:"Jogging",sequence_value:0},
+{_id:"Salsa",sequence_value:0},
+{_id:"Swimming",sequence_value:0}])
+
+//stored Javascript
+db.system.js.save(
+   {
+     _id: "getNextSeque123nceValue",
+     value : function(x) { var sequenceDocument = db.counter.findAndModify({
+      						query:{_id: x },
+						      update: {$inc:{sequence_value:1}},
+						      new:true
+   						});	
+   return sequenceDocument.sequence_value; }
+   }
+)
+
+
+--Adding subcategory
+{
+    "category": "Cooking",
+    "subCategory":"Italian"
+}
+
+--Adding category
+{
+    "category": "Cooking",
+}
+--Adding Trainer
+{
+    "subCategory":"Italian",
+    "Name":"Sample",
+    "Rate":250,
+    "Pic":"fkjhsf",
+    "links":["www.google.com","Youtube.com","yahoo.com"]
+}
