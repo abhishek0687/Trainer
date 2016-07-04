@@ -1,5 +1,6 @@
 var db = require('../core/db');
 var httpMsgs = require('../core/httpMsgs');
+  var ObjectId = require('mongodb').ObjectID; 
 
 exports.addTrainer=function(req,resp,reqBody){
 	db.dbs.collection(reqBody.subCategory).find({links:reqBody.links}).toArray(function(err,data){
@@ -20,7 +21,7 @@ exports.addTrainer=function(req,resp,reqBody){
 }
 
 
-exports.getTrainer=function(req,resp,category){
+exports.getAllTrainer=function(req,resp,category){
 	db.dbs.collection(category).find().toArray(function(err,data){
 		if(err){
 			httpMsgs.show500(req,resp,err);
@@ -32,52 +33,27 @@ exports.getTrainer=function(req,resp,category){
 }
 
 
-exports.updateTrainer=function(req,resp,id){
-	db.dbs.collection(category).find().toArray(function(err,data){
+exports.getTrainer=function(req,resp,id,category){
+	db.dbs.collection(category).find({"_id": new ObjectId(id)}).toArray(function(err,data){
 		if(err){
 			httpMsgs.show500(req,resp,err);
 		}						
 		else{
 			httpMsgs.sendJson(req,resp,data);
 		}
-	})	
-
-}
-
-function getNextSequenceValue(sequenceName){
-
-   var sequenceDocument = db.collection('counter').findAndModify({
-      query:{_id: sequenceName },
-      update: {$inc:{sequence_value:1}},
-      new:true
-   });
-	
-   return sequenceDocument.sequence_value;
+	})
 }
 
 
-
-/*var keys = [];
-	var insertString = "{";
-  for(var k in reqBody){ 
-  	keys.push(k);
-  	insertString += k+":"+reqBody[k]+",";
-  }
-  insertString = insertString.substring(0,insertString.length-1);
-
-db.dbs.collectionNames(function(err,data){
-		if(err){
-			httpMsgs.show500(req,resp,err);
-		}						
-		else{
-			var a=[];
-			data.map(function(x) {
-				if(x.name!="system.indexes" && x.name!="system.js" )
-    		 a.push(x.name);    		
-      })
-      httpMsgs.sendJson(req,resp,a);
+exports.updateTrainer=function(req,resp,id,category,updatedData){
+	db.dbs.collection(category).updateOne({"_id": new ObjectId(id)},{$set:{updatedData}}, function(err, data) {
+		if(!err){
+			httpMsgs.send200(req,resp);
+			console.log(data);
 		}
-	})	
+		else{
+			httpMsgs.show500(req,resp,err);	
+		}
+  });
+}
 
-*/
-  	//subCategory:reqBody.subCategory

@@ -33,12 +33,19 @@ exports.serve=function(app,express){
 
 	app.get('/trainer/:category',function(req,resp){
 		var category = req.params.category;
-		trainer.getTrainer(req,resp,category);
+		trainer.getAllTrainer(req,resp,category);
 	});	
 
 	app.put('/trainer/:category/:id',function(req,resp){
 		var id = req.params.id;
-		trainer.updateTrainer(req,resp,id);
+		var category = req.params.id;
+		trainer.updateTrainer(req,resp,id,category,req.body);
+	})
+
+	app.get('/trainer/:category/:id',function(req,resp){
+		var id = req.params.id;
+		var category = req.params.id;
+		trainer.getTrainer(req,resp,id,category);
 	})
 
 
