@@ -6,10 +6,12 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "^1.5.2",
     "body-parser": "~1.13.2",
     "express": "~4.13.1",
     "express-session": "~1.13.0",
-    "mysql": "~2.10.2",
-		"mongodb": "~1.4.26"
+    "lodash": "^2.4.1",
+    "mongodb": "~1.4.26",
+    "mysql": "~2.10.2"
   }
 }

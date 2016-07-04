@@ -48,3 +48,31 @@ db.system.js.save(
     "Pic":"fkjhsf",
     "links":["www.google.com","Youtube.com","yahoo.com"]
 }
+
+
+
+
+__________________________________________
+
+Dumps
+
+  //db.dbs.listCollections().toArray(function(err, collections){
+    //collections = [{"name": "coll1"}, {"name": "coll2"}]
+      //resp.write(JSON.stringify(collections));  
+      //resp.end();
+    //});
+    //
+  
+
+
+
+  var ObjectId = require('mongodb').ObjectID;
+
+var get_by_id = function(id, callback) {
+  console.log("find by: "+ id);
+  get_collection(function(collection) {
+    collection.findOne({"_id": new ObjectId(id)}, function(err, doc) {
+       callback(doc);
+    });
+  });
+}

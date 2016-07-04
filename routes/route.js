@@ -7,6 +7,7 @@ var db = require('../core/db');
 exports.serve=function(app,express){
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended: true}));
+	
 
 	app.get('/admin',function(req,resp){
 		rsp.end();
@@ -21,53 +22,46 @@ exports.serve=function(app,express){
 	});
 
 	app.post('/subcategory',function(req,resp){
-		console.log(req.body);
+		//console.log(req.body);
 		courses.addSubCourses(req,resp,req.body);
 	});
 
 	app.post('/trainer',function(req,resp){
-		console.log(req.body);
+		//console.log(req.body);
 		trainer.addTrainer(req,resp,req.body);
 	});
 
-	app.get('/trainer',function(req,resp){
-		console.log(req.body);
-		trainer.addTrainer(req,resp,req.body);
-	});
+	app.get('/trainer/:category',function(req,resp){
+		var category = req.params.category;
+		trainer.getTrainer(req,resp,category);
+	});	
+
+	app.put('/trainer/:category/:id',function(req,resp){
+		var id = req.params.id;
+		trainer.updateTrainer(req,resp,id);
+	})
+
 
 	app.get('/',function(req,resp){
-		console.log("in /");
-		db.dbs.collectionNames({name:1},function(err,data){
-		console.log(data);
-
-		})
-
-	})
-		
-
-
-}
-/*
-exports.serve=function(app,express){
-	var sess;
-	app.use(session({secret: 'ssshhhhh'}));
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({extended: true}));
-
-	app.use('/',express.static(__dirname+'/../Angular'));
-
-	app.get('/',function(req,res){
-		sess=req.session;
 		console.log(__dirname);
-		res.sendFile('index.html',{root: __dirname + '/../Angular'});
-
+		resp.sendfile('index.html', {'root': __dirname +'/public'});
 	})
-//************* User Request ***************
-	app.get('/users',function(req,resp){
-		sess=req.session;
-		user.getList(req,resp);
-	});
+
 }
+
+
+/*
+
+	app.get('/courses',function(req,resp){
+		//console.log(req.body);
+		trainer.getCourses(req,resp);
+	});
+
+	app.get('/courses/:name',function(req,resp){
+		//console.log(req.body);
+		var name = req.params.name;
+		trainer.getTrainer(req,resp);
+	});
 
 
 */

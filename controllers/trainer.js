@@ -20,11 +20,29 @@ exports.addTrainer=function(req,resp,reqBody){
 }
 
 
-exports.getTrainers=function(req,resp){
-	
-
+exports.getTrainer=function(req,resp,category){
+	db.dbs.collection(category).find().toArray(function(err,data){
+		if(err){
+			httpMsgs.show500(req,resp,err);
+		}						
+		else{
+			httpMsgs.sendJson(req,resp,data);
+		}
+	})
 }
 
+
+exports.updateTrainer=function(req,resp,id){
+	db.dbs.collection(category).find().toArray(function(err,data){
+		if(err){
+			httpMsgs.show500(req,resp,err);
+		}						
+		else{
+			httpMsgs.sendJson(req,resp,data);
+		}
+	})	
+
+}
 
 function getNextSequenceValue(sequenceName){
 
@@ -46,5 +64,20 @@ function getNextSequenceValue(sequenceName){
   	insertString += k+":"+reqBody[k]+",";
   }
   insertString = insertString.substring(0,insertString.length-1);
+
+db.dbs.collectionNames(function(err,data){
+		if(err){
+			httpMsgs.show500(req,resp,err);
+		}						
+		else{
+			var a=[];
+			data.map(function(x) {
+				if(x.name!="system.indexes" && x.name!="system.js" )
+    		 a.push(x.name);    		
+      })
+      httpMsgs.sendJson(req,resp,a);
+		}
+	})	
+
 */
   	//subCategory:reqBody.subCategory
