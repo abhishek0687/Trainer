@@ -56,19 +56,3 @@ exports.serve=function(app,express){
 
 }
 
-
-/*
-
-	app.get('/courses',function(req,resp){
-		//console.log(req.body);
-		trainer.getCourses(req,resp);
-	});
-
-	app.get('/courses/:name',function(req,resp){
-		//console.log(req.body);
-		var name = req.params.name;
-		trainer.getTrainer(req,resp);
-	});
-
-
-*/
