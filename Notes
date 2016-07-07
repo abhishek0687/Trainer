@@ -76,3 +76,48 @@ var get_by_id = function(id, callback) {
     });
   });
 }
+
+
+Insert Into Music
+_______________________________
+db.createCollection('ForeignLanuage')
+db.Music.find().pretty()
+db.Music.insert([{
+                        "Name": "Second Name",
+                        "Fees": "Rs 5000",
+                        "serviceType": "music",
+                        "openToWorkshops": "No",
+                        "area": "hitech",
+                        "privateOrGroup":"group",
+                        "languages":"bengali,english",
+                        "place":"Mine",
+                        "noOfClasses":"7",
+                        "image":"trainer2.jpg",
+                        "videos":["www.google.com","Youtube.com","yahoo.com"]
+                      },
+                      {
+                        "Name": "Third Name",
+                        "Fees": "Rs 6000",
+                        "serviceType": "dance",
+                        "openToWorkshops": "Yes",
+                        "area": "Gachibowli",
+                        "privateOrGroup":"private",
+                        "languages":"telugu,english",
+                        "place":"Yours",
+                        "noOfClasses":"0",
+                        "image":"trainer3.jpg",
+                        "videos":["www.google.com","Youtube.com","yahoo.com"]
+                      },
+                      {
+                        "Name": "Fourth Name",
+                        "Fees": "Rs 0",
+                        "serviceType": "Pata Nhi",
+                        "openToWorkshops": "Yes",
+                        "area": "Begupet",
+                        "privateOrGroup":"private",
+                        "languages":"spanish,english",
+                        "place":"Yours",
+                        "noOfClasses":"4",
+                        "image":"trainer4.jpg",
+                        "videos":["www.google.com","Youtube.com","yahoo.com"]
+                      }])

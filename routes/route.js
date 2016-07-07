@@ -44,7 +44,7 @@ exports.serve=function(app,express){
 
 	app.get('/trainer/:category/:id',function(req,resp){
 		var id = req.params.id;
-		var category = req.params.id;
+		var category = req.params.category;
 		trainer.getTrainer(req,resp,id,category);
 	})
 

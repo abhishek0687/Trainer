@@ -3,9 +3,9 @@ var httpMsgs = require('../core/httpMsgs');
   var ObjectId = require('mongodb').ObjectID; 
 
 exports.addTrainer=function(req,resp,reqBody){
-	db.dbs.collection(reqBody.subCategory).find({links:reqBody.links}).toArray(function(err,data){
-		if(!err && data.length==0){
-			db.dbs.collection(reqBody.subCategory).insert(reqBody,function(err,result){
+	//db.dbs.collection(reqBody.serviceType).find({links:reqBody.links}).toArray(function(err,data){
+		//if(!err && data.length==0){
+			db.dbs.collection(reqBody.serviceType).insert(reqBody,function(err,result){
 				if(err){
 					httpMsgs.show500(req,resp,err);
 				}						
@@ -13,11 +13,11 @@ exports.addTrainer=function(req,resp,reqBody){
 					httpMsgs.send200(req,resp);
 				}
 			});
-		}
-		else{
-			httpMsgs.customError(req,resp,err,data);
-		}
-	})
+		//}
+		//else{
+		//	httpMsgs.customError(req,resp,err,data);
+		//}
+	//})
 }
 
 
