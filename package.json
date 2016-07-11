@@ -10,6 +10,7 @@
     "express": "~4.13.1",
     "express-session": "~1.13.0",
     "mongodb": "~1.4.26",
-    "mysql": "~2.10.2"
+    "mysql": "~2.10.2",
+    "twilio": "^1.10.0"
   }
 }
