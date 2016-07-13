@@ -3,8 +3,11 @@ var bodyParser = require('body-parser');
 var courses = require('../controllers/courses');
 var trainer = require('../controllers/trainer');
 var db = require('../core/db');
+var settings = require('../dbConfig');
+
 
 exports.serve=function(app,express){
+
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended: true}));
 	
@@ -50,9 +53,24 @@ exports.serve=function(app,express){
 
 
 	app.get('/',function(req,resp){
-		console.log(__dirname);
-		resp.sendfile('index.html', {'root': __dirname +'/public'});
+		console.log("in /"+ __dirname);
+		resp.sendfile('home.html', {'root': __dirname +'/../public'});
 	})
+/********** Uploading ***************/
+	app.get('/upload',function(req,resp){
+		console.log("in /"+ __dirname);
+		resp.sendfile('upload.html', {'root': __dirname +'/../public'});
+	})
+
+	app.post('/file-upload', function(req, res) {
+		settings.upload(req,res,function(err) {
+	        if(err) {
+	        		console.log(err);
+	            return res.end("Error uploading file.");
+	        }
+	        res.end("File is uploaded");
+	    });
+	});
 
 }
 

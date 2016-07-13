@@ -1,26 +1,19 @@
-/*var mysql = require('mysql');
+var multer  = require('multer');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "welcome",
-  database: "sample"
+var storage =   multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './public/assets/images');
+  },
+  filename: function (req, file, callback) {
+  	console.log(file);
+    callback(null, file.originalname);
+  }
 });
 
-con.connect();
-module.exports.con = con;
-*/
+exports.upload = multer({ storage : storage}).single('userPhoto');
 
-exports.dbConfig = {
-  host: "localhost",
-  user: "root",
-  password: "welcome",
-  database: "sample"
-
-}
 exports.url = 'mongodb://localhost:27017/trainers';
 
 exports.webPort = 9001;
 
 exports.httpMsgsFormat = "JSON";
-//SPGKHGYYRG,SP3WUK6E99
