@@ -2,6 +2,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var courses = require('../controllers/courses');
 var trainer = require('../controllers/trainer');
+var sms = require('../controllers/sms');
 var db = require('../core/db');
 var settings = require('../dbConfig');
 
@@ -11,6 +12,10 @@ exports.serve=function(app,express){
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended: true}));
 	
+	app.get('/',function(req,resp){
+		console.log("in /"+ __dirname);
+		resp.sendfile('home.html', {'root': __dirname +'/../public'});
+	})
 
 	app.get('/admin',function(req,resp){
 		rsp.end();
@@ -52,25 +57,25 @@ exports.serve=function(app,express){
 	})
 
 
-	app.get('/',function(req,resp){
-		console.log("in /"+ __dirname);
-		resp.sendfile('home.html', {'root': __dirname +'/../public'});
-	})
-/********** Uploading ***************/
+/**********Image Uploading ***************/
 	app.get('/upload',function(req,resp){
 		console.log("in /"+ __dirname);
 		resp.sendfile('upload.html', {'root': __dirname +'/../public'});
 	})
 
-	app.post('/file-upload', function(req, res) {
-		settings.upload(req,res,function(err) {
+	app.post('/file-upload', function(req, resp) {
+		settings.upload(req,resp,function(err) {
 	        if(err) {
 	        		console.log(err);
-	            return res.end("Error uploading file.");
+	            return resp.end("Error uploading file.");
 	        }
-	        res.end("File is uploaded");
+	        resp.end("File is uploaded");
 	    });
 	});
+/***********************************/
 
+	app.post('/sms',function(req,resp){
+		sms.sendSMS(req,resp,req.body);
+	})
 }
 
