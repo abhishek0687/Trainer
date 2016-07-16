@@ -2,8 +2,14 @@ db.courses.update({category:"Fitness"},{$pushAll:{subCategory:["Jogging"]}})
 
 https://docs.mongodb.com/v3.0/tutorial/store-javascript-function-on-server/ --stored javascript
 
-Updating trainer details
-Deleting detais
+********* Mongo mport and Export ************
+
+http://www.thegeekstuff.com/2013/09/mongodump-mongorestore/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+TheGeekStuff+(The+Geek+Stuff)
+
+mongodump --db mongodevdb <dir name>
+mongorestore --db <db name> <dir name>
+
+***********
 
 
 db.counter.insertMany([{_id:"Chinese",sequence_value:0},
